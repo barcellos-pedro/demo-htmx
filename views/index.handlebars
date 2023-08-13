@@ -1,9 +1,7 @@
 <main>
-    <h1>Hello index</h1>
-
     {{> header }}
 
-    <button hx-get="/hobbies" hx-swap="outerHTML">
+    <button hx-get="/partials/hobbies" hx-swap="outerHTML" style="margin-top: 1em">
         Get hobbies
     </button>
 
@@ -11,31 +9,13 @@
 
     <hr>
 
-    <div x-data="{ show: false, title: 'dropdown' }" style="margin: 1em 0;">
-        <p x-title="title"></p>
-        <button type="button" @click="show = !show">
-            Open dropdown
-        </button>
-
-        <div x-show="show" style="display: none;">
-            <p>dropdown content...</p>
-            <p>Hello {{form.name}}</p>
-        </div>
-    </div>
+    {{#> dropdown button-text='Dropdown'}}
+    <p>Hello {{upperCase form.name}}</p>
+    {{/dropdown}}
 
     <hr>
 
-    {{#each form as |value key|}}
-
-    {{#> input id=key value=value }}
-    <label style="display: block;" for="{{key}}">{{key}}</label>
-    {{/input}}
-
-    {{/each}}
-
-    {{#> input id='remeber' value='yes' }}
-    <label style="display: block;" for="remeber">Remember info?</label>
-    {{/input}}
+    {{> form form-data=form}}
 
     <hr>
 

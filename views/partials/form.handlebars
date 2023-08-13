@@ -1,0 +1,26 @@
+<form method="POST" action="/form" x-data="{ show: false }">
+    <p>Data from server: {{json form-data}}</p>
+
+    <div x-show="show">
+        <p>Data sent from FORM:</p>
+        <pre id="form-data"></pre>
+    </div>
+
+    {{#each form as |value key|}}
+
+    {{#> input type="text" id=key name=key value=value }}
+    <label style="display: block;" for="{{key}}">{{key}}</label>
+    {{/input}}
+
+    {{/each}}
+
+    {{#> input id='remeber' value='yes' }}
+    <label style="display: block;" for="remeber">Remember info?</label>
+    {{/input}}
+
+    <div style="display: block; margin-top: 1em;">
+        <button type="submit" hx-post="/form" hx-target="#form-data" hx-swap="outerHTML"
+            @click.prevent="show = true">Send</button>
+        <button type="reset">Clear</button>
+    </div>
+</form>

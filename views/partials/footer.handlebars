@@ -1,7 +1,6 @@
-<footer>
-  <p>&copy; HTMX + Handlebars ❤️ <span></span></p>
+<footer x-data>
+  <p>
+    &copy; HTMX + Handlebars ❤️
+    <span x-text="new Date().getFullYear()"></span>
+  </p>
 </footer>
-
-<script>
-  document.querySelector('footer span').textContent = new Date().getFullYear();
-</script>

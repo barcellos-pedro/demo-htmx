@@ -1,28 +1,26 @@
 import Express from "express";
 import handlebars from "express-handlebars";
 
+import { data } from "./mock.js";
+import HELPERS from "./helpers.js";
+
 const app = Express();
 
-app.engine("handlebars", handlebars.engine());
+app.use(Express.json());
+app.use(Express.static("public"));
+app.use(Express.urlencoded({ extended: false }));
+
+app.engine("handlebars", handlebars.engine({ helpers: HELPERS }));
 app.set("view engine", "handlebars");
 
-app.get("/", (req, res) => {
-  res.render("index", {
-    ok: true,
-    hobbies: ["movies", "games", "dating"],
-    form: {
-      name: "Pedro",
-      email: "pedro@gmail.com",
-      age: 26,
-      married: false,
-    },
-  });
+app.get("/", (req, res) => res.render("index", data));
+
+app.get("/partials/hobbies", (req, res) => {
+  res.render("hobbies/index", { hobbies: data.hobbies });
 });
 
-app.get("/hobbies", (req, res) => {
-  res.render("hobbies/index", {
-    hobbies: ["movies", "games", "dating"],
-  });
+app.post("/form", (req, res) => {
+  res.json(req.body);
 });
 
 app.listen(8000);

@@ -1,0 +1,18 @@
+<div x-data="{ show: false }" @click.outside="show = false" @keyup.escape="show = false" style="margin: 1em 0;">
+    <button type="button" @click="show = !show">
+        {{button-text}}
+
+        <template x-if="show">
+            <span aria-hidden="true">&darr;</span>
+        </template>
+
+        <template x-if="!show">
+            <span aria-hidden="true">&uarr;</span>
+        </template>
+    </button>
+
+    {{! Content }}
+    <div x-show="show" x-transition style="display: none;">
+        {{>@partial-block}}
+    </div>
+</div>
