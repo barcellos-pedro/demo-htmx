@@ -16,7 +16,10 @@ app.set("view engine", "handlebars");
 app.get("/", (req, res) => res.render("index", data));
 
 app.get("/partials/hobbies", (req, res) => {
-  res.render("hobbies/index", { hobbies: data.hobbies });
+  res.render("hobbies/index", {
+    layout: false,
+    hobbies: data.hobbies,
+  });
 });
 
 app.post("/form", (req, res) => {

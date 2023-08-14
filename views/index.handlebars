@@ -1,5 +1,12 @@
 <main>
-    {{> header }}
+    <hr>
+
+    <h1>Hello {{title}}</h1>
+
+    <p>
+        Alipne + Handlebars interpolation =
+        <strong x-data x-text="'{{title}}'"></strong>
+    </p>
 
     <button hx-get="/partials/hobbies" hx-swap="outerHTML" style="margin-top: 1em">
         Get hobbies
